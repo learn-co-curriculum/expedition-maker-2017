@@ -6,6 +6,10 @@ class ExpeditionsController < ApplicationController
 
     def new
         @expedition = Expedition.new
+        3.times do
+            @expedition.equipment.build
+        end
+        @equipment = Equipment.all
     end
 
     def create
@@ -20,6 +24,6 @@ class ExpeditionsController < ApplicationController
     private
 
         def expedition_params
-            params.require(:expedition).permit(:name, :description, :length, :difficulty, equipment: [:name])
+            params.require(:expedition).permit(:name, :description, :length, :difficulty, equipment_ids: [], equipment_attributes: [:name])
         end
 end
